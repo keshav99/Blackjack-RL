@@ -9,13 +9,14 @@ num_episodes = 200000
 wins = []
 total_wins = 0
 
+print("Training the agent...")
 for i in range(1, num_episodes + 1):
     state = env.reset()[0] # reset the environment and get the initial state
     done = False
 
     while not done:
         action = agent.choose_action(state) # agent chooses action
-        next_state, reward, done, _ = env.step(action)  # then the environment takes the action
+        next_state, reward, done, _, _ = env.step(action)  # then the environment takes the action
         agent.episode.append((state, action, reward)) # the episode is appended with the state, action and reward
         state = next_state
     
@@ -24,7 +25,7 @@ for i in range(1, num_episodes + 1):
     if i % 1000 == 0:
         wins.append(total_wins / i)
     agent.update_q() # update the Q values and policy after each episode
-    if i % 20000 == 0:
+    if i % 5000 == 0:
         print(f"Episode {i}: Total Wins: {total_wins}")
 
 plt.plot(range(0, len(wins) * 1000, 1000), wins)

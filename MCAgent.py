@@ -13,6 +13,7 @@ class MCAgent:
         self.sum_space = list(range(4, 22)) # possible values for the sum of the player's hand
         self.dealer_space = list(range(1, 11))
         self.ace_space = [0, 1]
+        self.episode = []
 
         self.state_space = [] # all possible states (sum, dealer, ace)
         self.init_state_action_values()
